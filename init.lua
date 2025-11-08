@@ -1,8 +1,9 @@
-require("config.globals")   
+require("config.globals")
 require("config.options")
-require("config.keymaps")
-require("config.autocmd")
--- require("config.colorscheme")
 require("config.plugins")
+require("config.keymaps")
+require("config.lsp")
+require("config.autocmd")
 
 vim.cmd[[colorscheme catppuccin]]
+

@@ -1,0 +1,13 @@
+vim.lsp.enable({
+  'lua_ls',
+  'shopify_theme_ls',
+  'cssls',
+  'html',
+  'jsonls',
+  'emmet_ls',
+  'cssmodules_ls',
+  'eslint',
+  'tailwindcss',
+  'ts_ls',
+  'marksman'
+})
