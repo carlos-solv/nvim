@@ -7,6 +7,10 @@ km.set('n', '<leader>q', ':quit<CR>')
 -- Language Formatting
 km.set('n', '<leader>lf', vim.lsp.buf.format)
 
+-- Test Config
+km.set('n', '<leader>rn', vim.lsp.buf.rename)
+km.set('n', '<leader>ca', vim.lsp.buf.code_action)
+
 -- Open Diagnostic Floting Window
 km.set('n', '<leader>do', vim.diagnostic.open_float, { desc = 'Open floating diagnostic window' })
 
