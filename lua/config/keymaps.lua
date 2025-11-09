@@ -30,4 +30,7 @@ km.set('n', '<leader>p', ':bp<cr>')
 km.set('n', '<leader>x', ':bd<cr>')
 
 -- Toggle Comment
-km.set({'n','v'}, '<leader>/', ':CommentToggle<CR>')
+km.set({'n'}, '<leader>/', 'gbc', {remap = true})
+km.set({'n'}, '<leader>;', 'gcc', {remap = true})
+km.set({'v'}, '<leader>/', '<Esc>:normal gvgb<CR>')
+km.set({'v'}, '<leader>;', '<Esc>:normal gvgc<CR>')

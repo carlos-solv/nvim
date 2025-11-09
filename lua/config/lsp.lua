@@ -2,20 +2,6 @@
 vim.lsp.config['shopify_theme_ls'] = {
   cmd = { 'shopify', 'theme', 'language-server' },
   filetypes = { 'liquid' },
-  -- root_markers = {
-  --   '.shopifyignore',
-  --   '.theme-check.yml',
-  --   '.theme-check.yml',
-  --   'shopify.theme.toml',
-  --   'shopify.extension.toml'
-  -- },
-  -- root_dir = require('lspconfig').util.root_pattern({
-  --   '.shopifyignore',
-  --   '.theme-check.yml',
-  --   '.theme-check.yml',
-  --   'shopify.theme.toml',
-  --   'shopify.extension.toml'
-  -- }),
   init_options = {
     enableSchema = true,
     enableCompletions = true,
