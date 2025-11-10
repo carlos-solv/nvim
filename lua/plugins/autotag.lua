@@ -1,6 +1,11 @@
 return {
   'windwp/nvim-ts-autotag',
-  config = function()
-    require('nvim-ts-autotag').init({})
-  end
+  event = { 'BufReadPre', 'BufNewFile' },
+  opts = {
+    opts = {
+      enable_close = true,
+      enable_rename = true,
+      enable_close_on_slash = false,
+    }
+  }
 }
