@@ -1,15 +1,15 @@
 local km = vim.keymap
 
-km.set('n', '<leader>o', ':update<CR> :source<CR>')
-km.set('n', '<leader>w', ':write<CR>')
-km.set('n', '<leader>q', ':quit<CR>')
+km.set('n', '<leader>o', ':update<CR> :source<CR>', { desc = 'Source File' })
+km.set('n', '<leader>w', ':write<CR>', { desc = 'Write' })
+km.set('n', '<leader>q', ':quit<CR>', { desc = 'Quit' })
 
 -- Language Formatting
-km.set('n', '<leader>lf', vim.lsp.buf.format)
+km.set('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format File' })
 
 -- Test Config
-km.set('n', '<leader>rn', vim.lsp.buf.rename)
-km.set('n', '<leader>ca', vim.lsp.buf.code_action)
+km.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename Variable' })
+km.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action' })
 
 -- Open Diagnostic Floting Window
 km.set('n', '<leader>do', vim.diagnostic.open_float, { desc = 'Open floating diagnostic window' })
@@ -25,12 +25,12 @@ km.set("n", "<leader>ss", require("fzf-lua").spell_suggest, { desc = "Spelling S
 km.set("n", "<leader>sc", require("fzf-lua").spellcheck, { desc = "Spelling Check" })
 
 -- Buffer Navigation
-km.set('n', '<leader>n', ':bn<cr>')
-km.set('n', '<leader>p', ':bp<cr>')
-km.set('n', '<leader>x', ':bd<cr>')
+km.set('n', '<leader>n', ':bn<cr>', { desc = 'Next Buffer' })
+km.set('n', '<leader>p', ':bp<cr>', { desc = 'Previous Buffer' })
+km.set('n', '<leader>x', ':bd<cr>', { desc = 'Close Buffer' })
 
 -- Toggle Comment
-km.set({'n'}, '<leader>/', 'gbc', {remap = true})
-km.set({'n'}, '<leader>;', 'gcc', {remap = true})
-km.set({'v'}, '<leader>/', '<Esc>:normal gvgb<CR>')
-km.set({'v'}, '<leader>;', '<Esc>:normal gvgc<CR>')
+km.set({ 'n' }, '<leader>/', 'gbc', { remap = true, desc = 'Toggle Comment Block' })
+km.set({ 'n' }, '<leader>;', 'gcc', { remap = true, desc = 'Toggle Comment Line' })
+km.set({ 'v' }, '<leader>/', '<Esc>:normal gvgb<CR>', { desc = 'Toggle Comment Block' })
+km.set({ 'v' }, '<leader>;', '<Esc>:normal gvgc<CR>', { desc = 'Toggle Comment Line' })
