@@ -12,8 +12,9 @@ vim.o.smartcase = true
 vim.o.inccommand = 'split'
 
 -- Text wrap
-vim.o.wrap = true
-vim.o.breakindent = true
+--[[ vim.o.wrap = true ]]
+vim.o.wrap = false
+--[[ vim.o.breakindent = true ]]
 
 -- Tabstops
 vim.o.expandtab = true
@@ -33,3 +34,7 @@ vim.o.swapfile = false
 
 -- Clipboard
 vim.o.clipboard = "unnamedplus"
+
+-- Scroll off
+vim.opt.scrolloff = 8 -- minimum number of lines to keep above and below the cursor
+vim.opt.sidescrolloff = 8 --minimum number of columns to keep above and below the cursor
