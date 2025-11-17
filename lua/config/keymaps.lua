@@ -16,7 +16,7 @@ km.set('n', '<leader>do', vim.diagnostic.open_float, { desc = 'Open floating dia
 
 -- fzf-lua
 km.set("n", "<leader>ff", require("fzf-lua").files, { desc = "FZF Files" })
--- km.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
+km.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
 km.set("n", "<leader>fk", require("fzf-lua").keymaps, { desc = "Keymaps" })
 km.set("n", "<leader>fg", require("fzf-lua").live_grep, { desc = "FZF Grep" })
 km.set("n", "<leader>fb", require("fzf-lua").buffers, { desc = "FZF Buffers" })
