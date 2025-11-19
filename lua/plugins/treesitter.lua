@@ -5,7 +5,7 @@ return {
   end,
   config = function()
     require('nvim-treesitter.configs').init({
-      ensure_installed      = { "liquid", "html", "javascript", "css", "lua", "markdown", "markdown_inline", "query", "svelte", "tsx", "typescript", "vim", "vimdoc", "vue", "xml" },
+      ensure_installed      = { "liquid", "html", "javascript", "css", "lua", "markdown", "markdown_inline", "query", "svelte", "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "gopls" },
       highlight             = { enable = true },
       context_commentstring = { enable = true, enable_autocmd = false },
       indent                = { enable = true },

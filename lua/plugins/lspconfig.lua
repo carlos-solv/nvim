@@ -1,6 +1,11 @@
 return {
   'neovim/nvim-lspconfig',
-  dependencies = { 'saghen/blink.cmp' },
+  dependencies = {
+    'saghen/blink.cmp',
+    {"williamboman/mason.nvim", opts = {}},
+    "williamboman/mason-lspconfig.nvim",
+    "WhoIsSethDaniel/mason-tool-installer.nvim"
+  },
 
   -- example using `opts` for defining servers
   opts = {
@@ -12,6 +17,7 @@ return {
       jsonls = {},
       emmet_ls = {},
       -- cssmodules_ls = {},
+      gopls = {},
       eslint = {},
       tailwindcss = {},
       ts_ls = {},

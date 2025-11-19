@@ -5,7 +5,7 @@ km.set('n', '<leader>w', ':write<CR>', { desc = 'Write' })
 km.set('n', '<leader>q', ':quit<CR>', { desc = 'Quit' })
 
 -- Language Formatting
-km.set('n', '<leader>lf', vim.lsp.buf.format, { desc = 'Format File' })
+km.set('n', '<leader>lf', require('conform').format, { desc = 'Format File (with Conform)' })
 
 -- Test Config
 km.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename Variable' })
