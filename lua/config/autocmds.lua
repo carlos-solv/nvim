@@ -18,7 +18,7 @@ vim.api.nvim_create_autocmd('LspAttach', {
 vim.cmd [[set completeopt+=menuone,noselect,popup]]
 
 vim.api.nvim_create_autocmd({ "BufNewFile", "BufRead" }, {
-  pattern = { "*.js", "*.html", "*.css", "*.liquid", "*.lua", "*.json" },
+  pattern = { "*.js", "*.html", "*.css", "*.liquid", "*.lua", "*.json", "*.ts", "*.tsx", "*.jsx" },
   callback = function()
     vim.opt.tabstop = 2
     vim.opt.softtabstop = 2

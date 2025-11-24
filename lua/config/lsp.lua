@@ -19,6 +19,7 @@ vim.lsp.enable({
   'html',
   'jsonls',
   'emmet_ls',
+  'prisma_language_server',
   -- 'cssmodules_ls',
   'eslint',
   'tailwindcss',

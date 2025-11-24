@@ -16,6 +16,7 @@ return {
       html = {},
       jsonls = {},
       emmet_ls = {},
+      prisma_language_server = {},
       -- cssmodules_ls = {},
       gopls = {},
       eslint = {},
