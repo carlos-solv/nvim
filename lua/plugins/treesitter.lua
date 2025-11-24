@@ -1,13 +1,12 @@
 return {
   'nvim-treesitter/nvim-treesitter',
-  build = function()
-    require('nvim-treesitter.install').update({ with_sync = true })
-  end,
+  build = ":TSUpdate",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
-    require('nvim-treesitter.configs').init({
-      ensure_installed      = { "liquid", "html", "javascript", "css", "lua", "markdown", "markdown_inline", "query", "svelte", "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "gopls" },
+    require('nvim-treesitter.configs').setup({
+      ensure_installed      = { "liquid", "html", "javascript", "css", "lua", "markdown", "markdown_inline", "query", "svelte", "tsx", "typescript", "vim", "vimdoc", "vue", "xml", "go" },
       highlight             = { enable = true },
-      context_commentstring = { enable = true, enable_autocmd = false },
+      --[[ context_commentstring = { enable = true, enable_autocmd = false }, ]]
       indent                = { enable = true },
       incremental_selection = {
         enable = true,
