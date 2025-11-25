@@ -1,37 +1,54 @@
-local km = vim.keymap
+local km = vim.keymap.set
+local fzf = require('fzf-lua')
 
-km.set('n', '<leader>o', ':update<CR> :source<CR>', { desc = 'Source File' })
-km.set('n', '<leader>w', ':write<CR>', { desc = 'Write' })
-km.set('n', '<leader>q', ':quit<CR>', { desc = 'Quit' })
+km('n', '<leader>o', ':update<CR> :source<CR>', { desc = 'Source File' })
+km('n', '<leader>w', ':write<CR>', { desc = 'Write' })
+km('n', '<leader>q', ':quit<CR>', { desc = 'Quit' })
 
 -- Language Formatting
-km.set('n', '<leader>lf', require('conform').format, { desc = 'Format File (with Conform)' })
+km('n', '<leader>lf', require('conform').format, { desc = 'Format File (with Conform)' })
 
 -- Test Config
-km.set('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename Variable' })
-km.set('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action' })
+km('n', '<leader>rn', vim.lsp.buf.rename, { desc = 'Rename Variable' })
+km('n', '<leader>ca', vim.lsp.buf.code_action, { desc = 'Code Action' })
 
 -- Open Diagnostic Floting Window
-km.set('n', '<leader>do', vim.diagnostic.open_float, { desc = 'Open floating diagnostic window' })
+km('n', '<leader>do', vim.diagnostic.open_float, { desc = 'Open floating diagnostic window' })
 
 -- fzf-lua
-km.set("n", "<leader>ff", require("fzf-lua").files, { desc = "FZF Files" })
-km.set("n", "<leader>m", require("fzf-lua").marks, { desc = "Marks" })
-km.set("n", "<leader>fo", require("fzf-lua").oldfiles, { desc = "Old Files" })
-km.set("n", "<leader>fk", require("fzf-lua").keymaps, { desc = "Keymaps" })
-km.set("n", "<leader>fg", require("fzf-lua").live_grep, { desc = "FZF Grep" })
-km.set("n", "<leader>fb", require("fzf-lua").buffers, { desc = "FZF Buffers" })
-km.set("n", "<leader>gs", require("fzf-lua").git_status, { desc = "Git Status" })
-km.set("n", "<leader>ss", require("fzf-lua").spell_suggest, { desc = "Spelling Suggestions" })
-km.set("n", "<leader>sc", require("fzf-lua").spellcheck, { desc = "Spelling Check" })
+-- Files and Search
+km("n", "<leader>ff", fzf.files, { desc = "FZF: Files" })
+km("n", "<leader>fw", fzf.grep_cword, { desc = "FZF: Grep word under cursor" })
+km("n", "<leader>fb", fzf.buffers, { desc = "FZF: Buffers" })
+km("n", "<leader>fh", fzf.help_tags, { desc = "FZF: Help Tags" })
+km("n", "<leader>fg", fzf.live_grep, { desc = "FZF: Grep" })
+km("n", "<leader>fo", fzf.oldfiles, { desc = "Old Files" })
+km("n", "<leader>m", fzf.marks, { desc = "Marks" })
+
+-- Git
+km("n", "<leader>gs", fzf.git_status, { desc = "FZF: Git Status" })
+km("n", "<leader>gb", fzf.git_branches, { desc = "FZF: Git Branches" })
+km("n", "<leader>ga", fzf.git_blame, { desc = "FZF: Git Blame" })
+km("n", "<leader>gc", fzf.git_commits, { desc = "FZF: Git Commits" })
+
+-- Utilities
+km("n", "<leader>fk", fzf.keymaps, { desc = "Keymaps" })
+km("n", "<leader>ss", fzf.spell_suggest, { desc = "Spelling Suggestions" })
+km("n", "<leader>sc", fzf.spellcheck, { desc = "Spelling Check" })
+
+-- LSP References
+km('n', '<leader>gr', fzf.lsp_references, { desc = 'FZF: LSP references' })
+km('n', '<leader>gd', fzf.lsp_definitions, { desc = 'FZF: LSP definitions' })
+km('n', '<leader>gi', fzf.lsp_implementations, { desc = 'FZF: LSP implementations' })
+km('n', '<leader>gt', fzf.lsp_typedefs, { desc = 'FZF: LSP type defs' })
 
 -- Buffer Navigation
-km.set('n', '<leader>n', ':bn<cr>', { desc = 'Next Buffer' })
-km.set('n', '<leader>p', ':bp<cr>', { desc = 'Previous Buffer' })
-km.set('n', '<leader>x', ':bd<cr>', { desc = 'Close Buffer' })
+km('n', '<leader>n', ':bn<cr>', { desc = 'Next Buffer' })
+km('n', '<leader>p', ':bp<cr>', { desc = 'Previous Buffer' })
+km('n', '<leader>x', ':bd<cr>', { desc = 'Close Buffer' })
 
 -- Toggle Comment
-km.set({ 'n' }, '<leader>/', 'gbc', { remap = true, desc = 'Toggle Comment Block' })
-km.set({ 'n' }, '<leader>;', 'gcc', { remap = true, desc = 'Toggle Comment Line' })
-km.set({ 'v' }, '<leader>/', '<Esc>:normal gvgb<CR>', { desc = 'Toggle Comment Block' })
-km.set({ 'v' }, '<leader>;', '<Esc>:normal gvgc<CR>', { desc = 'Toggle Comment Line' })
+km({ 'n' }, '<leader>/', 'gbc', { remap = true, desc = 'Toggle Comment Block' })
+km({ 'n' }, '<leader>;', 'gcc', { remap = true, desc = 'Toggle Comment Line' })
+km({ 'v' }, '<leader>/', '<Esc>:normal gvgb<CR>', { desc = 'Toggle Comment Block' })
+km({ 'v' }, '<leader>;', '<Esc>:normal gvgc<CR>', { desc = 'Toggle Comment Line' })
