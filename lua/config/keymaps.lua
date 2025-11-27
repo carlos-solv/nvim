@@ -63,7 +63,7 @@ km({ 'n' }, '<leader>;', 'gcc', { remap = true, desc = 'Comment: Toggle Comment 
 km({ 'v' }, '<leader>/', '<Esc>:normal gvgb<CR>', { desc = 'Comment: Toggle Comment Block' })
 km({ 'v' }, '<leader>;', '<Esc>:normal gvgc<CR>', { desc = 'Comment: Toggle Comment Line' })
 
--- Markdown Preview
+-- Markdown and Obsidian
 km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
 
 -- Indentation
