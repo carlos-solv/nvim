@@ -1,5 +1,6 @@
 local km = vim.keymap.set
 local fzf = require('fzf-lua')
+local obsidian = require('obsidian')
 
 km('n', '<leader>o', ':update<CR> :source<CR>', { desc = 'Source File' })
 km('n', '<leader>w', ':write<CR>', { desc = 'Write' })
@@ -65,6 +66,7 @@ km({ 'v' }, '<leader>;', '<Esc>:normal gvgc<CR>', { desc = 'Comment: Toggle Comm
 
 -- Markdown and Obsidian
 km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
+km("n", "<leader>gf", ':Obsidian follow_link<CR>')
 
 -- Indentation
 km('v', '<Tab>', '>gv', { desc = 'Indent' })

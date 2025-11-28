@@ -1,5 +1,5 @@
 return {
-  "epwalsh/obsidian.nvim",
+  "obsidian-nvim/obsidian.nvim",
   version = "*",
   lazy = true,
   event = {
@@ -19,18 +19,19 @@ return {
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
-  opts = {
-    workspaces = {
-      {
-        name = "zettelkasten",
-        path = "~/Documents/zettelkasten",
+  config = function()
+    require("obsidian").setup({
+      legacy_commands = false,
+      workspaces = {
+        {
+          name = "zettelkasten",
+          path = "~/Documents/zettelkasten",
+        },
+        {
+          name = "vault",
+          path = "~/Documents/vault",
+        },
       },
-      {
-        name = "vault",
-        path = "~/Documents/vault",
-      },
-    },
-
-    -- see below for full list of options 👇
-  },
+    })
+  end
 }
