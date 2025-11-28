@@ -34,3 +34,11 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end
 })
+
+vim.api.nvim_create_autocmd({ "BufWinEnter", "BufReadPost" }, {
+  callback = function()
+    if vim.bo.buftype == "" then     -- only for normal file buffers
+      vim.opt_local.foldmethod = "indent"
+    end
+  end,
+})

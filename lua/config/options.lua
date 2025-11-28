@@ -40,3 +40,8 @@ vim.o.scrolloff = 8     -- minimum number of lines to keep above and below the c
 vim.o.sidescrolloff = 8 --minimum number of columns to keep above and below the cursor
 
 vim.o.conceallevel = 1
+
+vim.o.foldmethod = "indent"
+vim.o.foldenable = true
+vim.o.foldlevel = 99
+vim.o.foldlevelstart = 99
