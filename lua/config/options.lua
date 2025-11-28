@@ -36,5 +36,7 @@ vim.o.swapfile = false
 vim.o.clipboard = "unnamedplus"
 
 -- Scroll off
-vim.opt.scrolloff = 8 -- minimum number of lines to keep above and below the cursor
-vim.opt.sidescrolloff = 8 --minimum number of columns to keep above and below the cursor
+vim.o.scrolloff = 8     -- minimum number of lines to keep above and below the cursor
+vim.o.sidescrolloff = 8 --minimum number of columns to keep above and below the cursor
+
+vim.o.conceallevel = 1
