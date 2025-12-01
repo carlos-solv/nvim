@@ -34,7 +34,7 @@ km('n', "<leader>fb", fzf.buffers, { desc = "FZF: Buffers" })
 km('n', "<leader>fh", fzf.help_tags, { desc = "FZF: Help Tags" })
 km('n', "<leader>fg", fzf.live_grep, { desc = "FZF: Grep" })
 km('n', "<leader>fo", fzf.oldfiles, { desc = "Old Files" })
-km('n', "<leader>m", fzf.marks, { desc = "FZF: Marks" })
+km('n', "<leader>fm", fzf.marks, { desc = "FZF: Marks" })
 
 -- Git
 km('n', "<leader>gs", fzf.git_status, { desc = "FZF: Git Status" })
