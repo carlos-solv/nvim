@@ -1,37 +1,36 @@
+local home = vim.fn.expand("~")
+
 return {
   "obsidian-nvim/obsidian.nvim",
   version = "*",
   lazy = true,
+
+  -- Only load when opening/creating markdown files
+  -- inside ~/Documents/vault or ~/Documents/zettelkasten
   event = {
-    "BufReadPre " .. vim.fn.expand "~" .. "/Documents/vault/*.md",
-    "BufNewFile " .. vim.fn.expand "~" .. "/Documents/vault/*.md",
-    "BufReadPre " .. vim.fn.expand "~" .. "/Documents/zettelkasten/*.md",
-    "BufNewFile " .. vim.fn.expand "~" .. "/Documents/zettelkasten/*.md",
+    "BufReadPre " .. home .. "/Documents/vault/**.md",
+    "BufNewFile " .. home .. "/Documents/vault/**.md",
+    "BufReadPre " .. home .. "/Documents/zettelkasten/**.md",
+    "BufNewFile " .. home .. "/Documents/zettelkasten/**.md",
   },
-  -- Replace the above line with this if you only want to load obsidian.nvim for markdown files in your vault:
-  -- event = {
-  --   -- If you want to use the home shortcut '~' here you need to call 'vim.fn.expand'.
-  --   -- E.g. "BufReadPre " .. vim.fn.expand "~" .. "/my-vault/*.md"
-  --   -- refer to `:h file-pattern` for more examples
-  --   "BufReadPre path/to/my-vault/*.md",
-  --   "BufNewFile path/to/my-vault/*.md",
-  -- },
+
   dependencies = {
     "nvim-lua/plenary.nvim",
   },
+
   config = function()
     require("obsidian").setup({
       legacy_commands = false,
       workspaces = {
         {
           name = "zettelkasten",
-          path = "~/Documents/zettelkasten",
+          path = home .. "/Documents/zettelkasten",
         },
         {
           name = "vault",
-          path = "~/Documents/vault",
+          path = home .. "/Documents/vault",
         },
       },
     })
-  end
+  end,
 }
