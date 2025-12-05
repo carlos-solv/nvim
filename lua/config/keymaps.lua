@@ -7,7 +7,11 @@ km('n', '<leader>w', ':write<CR>', { desc = 'Write' })
 km('n', '<leader>q', ':quit<CR>', { desc = 'Quit' })
 
 -- Language Formatting
-km('n', '<leader>lf', require('conform').format, { desc = 'Conform: Format File' })
+km('n', '<leader>lf', function()
+    require('conform').format({ async = true, timeout_ms = 5000 })
+  end,
+  { desc = 'Conform: Format File' }
+)
 km('', "<leader>sf", function()
   require("conform").format({ async = true }, function(err)
     if not err then
