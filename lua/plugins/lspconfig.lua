@@ -19,7 +19,6 @@ return {
       eslint = {},
       tailwindcss = {},
       ts_ls = {},
-      marksman = {}
     }
   },
   config = function(_, opts)

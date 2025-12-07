@@ -19,10 +19,9 @@ vim.lsp.enable({
   'html',
   'jsonls',
   'emmet_ls',
-  'prisma_language_server',
   -- 'cssmodules_ls',
+  'basedpyright',
   'eslint',
   'tailwindcss',
   'ts_ls',
-  'marksman'
 })
