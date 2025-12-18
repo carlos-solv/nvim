@@ -10,6 +10,18 @@ return {
     config = function()
       vim.o.termguicolors = true
       vim.cmd.colorschem("catppuccin")
+
+      require("catppuccin").setup({
+        flavour = 'mocha',
+        transparent_background = 'true',
+        integrations = {
+          fzf = true,
+          blink_cmp = {
+            style = 'bordered'
+          },
+          nvimtree = true
+        }
+      })
     end
   }
 }

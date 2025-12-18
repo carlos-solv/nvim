@@ -68,10 +68,14 @@ km({ 'n' }, '<leader>;', 'gcc', { remap = true, desc = 'Comment: Toggle Comment 
 km({ 'v' }, '<leader>/', '<Esc>:normal gvgb<CR>', { desc = 'Comment: Toggle Comment Block' })
 km({ 'v' }, '<leader>;', '<Esc>:normal gvgc<CR>', { desc = 'Comment: Toggle Comment Line' })
 
--- Markdown and Obsidian
-km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
-km("n", "<leader>gf", ':Obsidian follow_link<CR>')
-
 -- Indentation
 km('v', '<Tab>', '>gv', { desc = 'Indent' })
 km('v', '<S-Tab>', '<gv', { desc = 'Outdent' })
+
+-- File Tree
+km('n', '<leader>fe', '<cmd>NvimTreeToggle<cr>', { desc = 'File Tree: Open Exlorer' })
+km('n', '<leader>fr', '<cmd>NvimTreeFindFile<cr>', { desc = 'File Tree: Reveal on Explorer' })
+
+-- Markdown and Obsidian
+km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
+km("n", "<leader>gf", ':Obsidian follow_link<CR>')
