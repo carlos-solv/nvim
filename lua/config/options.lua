@@ -12,9 +12,9 @@ vim.o.smartcase = true
 vim.o.inccommand = 'split'
 
 -- Text wrap
-vim.o.wrap = true
---[[ vim.o.wrap = false ]]
---[[ vim.o.breakindent = true ]]
+--[[ vim.o.wrap = true ]]
+vim.o.wrap = false
+vim.o.breakindent = true
 
 -- Tabstops
 vim.o.expandtab = true

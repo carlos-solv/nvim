@@ -1,41 +1,93 @@
 return {
-	"nvim-treesitter/nvim-treesitter",
-	build = ":TSUpdate",
-  branch = "master",
-	event = { "BufReadPost", "BufNewFile" },
-	config = function()
-		require("nvim-treesitter.configs").setup({
-			ensure_installed = {
-				"liquid",
-				"html",
-				"javascript",
-				"css",
-				"lua",
-				"markdown",
-				"markdown_inline",
-				"python",
-				"query",
-				"svelte",
-				"tsx",
-				"typescript",
-				"vim",
-				"vimdoc",
-				"vue",
-				"xml",
-				"go",
-			},
-			highlight = { enable = true, additional_vim_regex_highlighting = { "markdown" } },
-			--[[ context_commentstring = { enable = true, enable_autocmd = false }, ]]
-			indent = { enable = true },
-			incremental_selection = {
-				enable = true,
-				keymaps = {
-					init_selection = "gnn",
-					node_incremental = "grn",
-					scope_incremental = "grc",
-					node_decremental = "grm",
-				},
-			},
-		})
-	end,
+  "nvim-treesitter/nvim-treesitter",
+  branch = "main",
+  lazy = false,
+  build = ":TSUpdate",
+  config = function()
+    require("nvim-treesitter").setup({
+      install_dir = vim.fn.stdpath("data") .. "/site",
+    })
+
+    vim.api.nvim_create_autocmd("User", {
+      pattern = "TSUpdate",
+      callback = function()
+        require("nvim-treesitter.parsers").liquid = {
+          install_info = {
+            url = "https://github.com/hankthetank27/tree-sitter-liquid",
+            branch = "main",
+            files = { "src/parser.c", "src/scanner.c" },
+            queries = "queries",
+          },
+        }
+      end,
+    })
+
+    require("nvim-treesitter").install({
+      "liquid",
+      "html",
+      "javascript",
+      "css",
+      "lua",
+      "markdown",
+      "markdown_inline",
+      "python",
+      "query",
+      "svelte",
+      "tsx",
+      "typescript",
+      "vim",
+      "vimdoc",
+      "vue",
+      "xml",
+      "go",
+    })
+
+    vim.treesitter.language.register("liquid", { "liquid" })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "liquid",
+        "html",
+        "javascript",
+        "css",
+        "lua",
+        "markdown",
+        "python",
+        "query",
+        "svelte",
+        "typescript",
+        "tsx",
+        "vue",
+        "xml",
+        "go",
+        "vim",
+      },
+      callback = function()
+        vim.treesitter.start()
+      end,
+    })
+
+    vim.api.nvim_create_autocmd("FileType", {
+      pattern = {
+        "liquid",
+        "html",
+        "javascript",
+        "css",
+        "lua",
+        "markdown",
+        "python",
+        "query",
+        "svelte",
+        "typescript",
+        "tsx",
+        "vue",
+        "xml",
+        "go",
+        "vim",
+      },
+      callback = function()
+        vim.bo.indentexpr = "v:lua.require'nvim-treesitter'.indentexpr()"
+      end,
+    })
+  end,
 }

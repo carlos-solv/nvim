@@ -79,3 +79,6 @@ km('n', '<leader>fr', '<cmd>NvimTreeFindFile<cr>', { desc = 'File Tree: Reveal o
 -- Markdown and Obsidian
 km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
 km("n", "<leader>gf", ':Obsidian follow_link<CR>')
+
+-- Undo Tree
+km('n', '<leader>ut', require('undotree').toggle, { noremap = true, silent = true })
