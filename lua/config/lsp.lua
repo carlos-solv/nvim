@@ -13,15 +13,14 @@ vim.lsp.config['shopify_theme_ls'] = {
 }
 
 vim.lsp.enable({
-  'lua_ls',
-  'shopify_theme_ls',
-  'cssls',
-  'html',
-  'jsonls',
-  'emmet_ls',
-  -- 'cssmodules_ls',
-  'basedpyright',
-  'eslint',
-  'tailwindcss',
-  'ts_ls',
+  "lua_ls",
+  "shopify_theme_ls",
+  "cssls",
+  "html",
+  "jsonls",
+  "emmet_ls",
+  "basedpyright",
+  "eslint",
+  "tailwindcss",
+  "ts_ls",
 })

@@ -1,10 +1,8 @@
 return {
-  'neovim/nvim-lspconfig',
+  "neovim/nvim-lspconfig",
   dependencies = {
-    'saghen/blink.cmp',
+    "saghen/blink.cmp",
   },
-
-  -- example using `opts` for defining servers
   opts = {
     servers = {
       lua_ls = {},
@@ -14,21 +12,18 @@ return {
       jsonls = {},
       emmet_ls = {},
       prisma_language_server = {},
-      -- cssmodules_ls = {},
       gopls = {},
       eslint = {},
       tailwindcss = {},
       ts_ls = {},
-    }
+    },
   },
   config = function(_, opts)
     local lspconfig = vim.lsp.config
+
     for server, config in pairs(opts.servers) do
-      -- passing config.capabilities to blink.cmp merges with the capabilities in your
-      -- `opts[server].capabilities, if you've defined it
-      config.capabilities = require('blink.cmp').get_lsp_capabilities(config.capabilities)
+      config.capabilities = require("blink.cmp").get_lsp_capabilities(config.capabilities)
       lspconfig[server] = config
     end
-  end
-
+  end,
 }
