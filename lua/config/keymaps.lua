@@ -1,3 +1,4 @@
+
 local km = vim.keymap.set
 local fzf = require('fzf-lua')
 local obsidian = require('obsidian')
@@ -80,5 +81,5 @@ km('n', '<leader>fr', '<cmd>NvimTreeFindFile<cr>', { desc = 'File Tree: Reveal o
 km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
 km("n", "<leader>gf", ':Obsidian follow_link<CR>')
 
--- Undo Tree
-km('n', '<leader>ut', require('undotree').toggle, { noremap = true, silent = true })
+-- Native Undotree
+vim.keymap.set("n", "<leader>u", "<cmd>Undotree<CR>", { desc = "Undo tree" })

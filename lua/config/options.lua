@@ -1,8 +1,15 @@
+vim.g.mapleader = " "
 vim.o.nu = true
 vim.o.relativenumber = true
 vim.o.signcolumn = "yes"
 vim.o.winborder = "rounded"
 vim.o.termguicolors = true
+
+-- Autocomplete
+vim.o.autocomplete = true
+vim.o.pumborder = 'rounded'
+vim.o.pummaxwidth = 40
+vim.o.completeopt = 'menu,menuone,noselect,nearest'
 
 -- Search
 vim.o.ignorecase = true
