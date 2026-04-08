@@ -6,10 +6,11 @@ vim.o.winborder = "rounded"
 vim.o.termguicolors = true
 
 -- Autocomplete
-vim.o.autocomplete = true
+-- Completion UI
+vim.o.autocomplete = false
 vim.o.pumborder = 'rounded'
 vim.o.pummaxwidth = 40
-vim.o.completeopt = 'menu,menuone,noselect,nearest'
+vim.o.completeopt = 'menu,menuone,noselect'
 
 -- Search
 vim.o.ignorecase = true

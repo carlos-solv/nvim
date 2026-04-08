@@ -6,15 +6,17 @@ vim.api.nvim_create_autocmd('TextYankPost', {
   end,
 })
 
-vim.api.nvim_create_autocmd('LspAttach', {
+--[[ vim.api.nvim_create_autocmd('LspAttach', {
   group = vim.api.nvim_create_augroup('my.lsp', { clear = true }),
   callback = function(ev)
     local client = assert(vim.lsp.get_client_by_id(ev.data.client_id))
     if client:supports_method('textDocument/completion') then
-      vim.lsp.completion.enable(true, client.id, ev.buf, { autotrigger = true })
+      vim.lsp.completion.enable(true, client.id, ev.buf, {
+        autotrigger = true,
+      })
     end
   end,
-})
+}) ]]
 
 
 vim.api.nvim_create_autocmd({ 'BufNewFile', 'BufRead' }, {
@@ -43,5 +45,16 @@ vim.api.nvim_create_autocmd({ 'BufWinEnter', 'BufReadPost' }, {
     if vim.bo.buftype == '' then
       vim.opt_local.foldmethod = 'indent'
     end
+  end,
+})
+
+-- nvim-tree integration
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "NvimTree",
+  callback = function(ev)
+    vim.keymap.set("n", "<leader>as", "<cmd>ClaudeCodeTreeAdd<cr>", {
+      buffer = ev.buf,
+      desc = "Claude: Add File From Tree",
+    })
   end,
 })

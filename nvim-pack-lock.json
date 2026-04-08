@@ -8,6 +8,11 @@
       "rev": "62437532b38495551410b3f377bcf4aaac574ebe",
       "src": "https://github.com/rmagatti/auto-session"
     },
+    "blink.cmp": {
+      "rev": "78336bc89ee5365633bcf754d93df01678b5c08f",
+      "src": "https://github.com/saghen/blink.cmp",
+      "version": "'v1.10.2'"
+    },
     "bufferline.nvim": {
       "rev": "655133c3b4c3e5e05ec549b9f8cc2894ac6f51b3",
       "src": "https://github.com/akinsho/bufferline.nvim"
@@ -16,6 +21,10 @@
       "rev": "df2a1f9f3392d688397e945544a30aec8fc9b4c7",
       "src": "https://github.com/catppuccin/nvim",
       "version": "'main'"
+    },
+    "claudecode.nvim": {
+      "rev": "432121f0f5b9bda041030d1e9e83b7ba3a93dd8f",
+      "src": "https://github.com/coder/claudecode.nvim"
     },
     "conform.nvim": {
       "rev": "086a40dc7ed8242c03be9f47fbcee68699cc2395",
@@ -81,6 +90,10 @@
     "plenary.nvim": {
       "rev": "b9fd5226c2f76c951fc8ed5923d85e4de065e509",
       "src": "https://github.com/nvim-lua/plenary.nvim"
+    },
+    "snacks.nvim": {
+      "rev": "ad9ede6a9cddf16cedbd31b8932d6dcdee9b716e",
+      "src": "https://github.com/folke/snacks.nvim"
     },
     "vim-matchup": {
       "rev": "0fb1e6b7cea34e931a2af50b8ad565c5c4fd8f4d",

@@ -32,6 +32,9 @@ vim.pack.add({
 
   { src = gh("jmbuhr/otter.nvim"),                           name = "otter.nvim" },
   { src = gh("nvim-treesitter/nvim-treesitter"),             name = "nvim-treesitter",              version = "main" },
+  { src = gh("folke/snacks.nvim"),                           name = "snacks.nvim" },
+  { src = gh("coder/claudecode.nvim"),                       name = "claudecode.nvim" },
+  { src = gh("saghen/blink.cmp"),                            name = "blink.cmp",                    version = "v1.10.2" },
 })
 
 local configured = {}
@@ -107,40 +110,6 @@ vim.api.nvim_create_autocmd("PackChanged", {
     end
   end,
 })
-
--- ============================================================================
--- completion + native LSP defaults
--- ============================================================================
-vim.api.nvim_create_autocmd("LspAttach", {
-  callback = function(ev)
-    local client = vim.lsp.get_client_by_id(ev.data.client_id)
-    if not client then
-      return
-    end
-
-    vim.lsp.completion.enable(true, client.id, ev.buf, {
-      autotrigger = true,
-    })
-
-    -- optional: enable on every keypress, not only server trigger chars
-    -- local cp = client.server_capabilities.completionProvider
-    -- if cp then
-    --   cp.triggerCharacters = cp.triggerCharacters or {}
-    --   for _, ch in ipairs({
-    --     ".", ":", ">", "/", "\"", "'", "`",
-    --     "@", "#", "$", "-", "_",
-    --   }) do
-    --     if not vim.list_contains(cp.triggerCharacters, ch) then
-    --       table.insert(cp.triggerCharacters, ch)
-    --     end
-    --   end
-    -- end
-  end,
-})
-
-vim.keymap.set("i", "<C-Space>", function()
-  vim.lsp.completion.get()
-end, { desc = "LSP completion" })
 
 -- ============================================================================
 -- theme / ui
@@ -266,10 +235,112 @@ load_once("mason.nvim", nil, function()
   require("mason").setup({})
 end)
 
+load_once("snacks.nvim", nil, function()
+  require("snacks").setup({
+    -- keep Snacks focused; don't replace tools you already use
+    bigfile = { enabled = true },
+    gitbrowse = { enabled = true },
+
+    dashboard = { enabled = false },
+    picker = { enabled = false },
+    explorer = { enabled = false },
+    input = { enabled = false },
+    notifier = { enabled = false },
+    quickfile = { enabled = false },
+    scope = { enabled = false },
+    scroll = { enabled = false },
+    indent = { enabled = false },
+    statuscolumn = { enabled = false },
+    words = { enabled = false },
+    image = { enabled = false },
+  })
+end)
+
+load_once("claudecode.nvim", { "snacks.nvim" }, function()
+  require("claudecode").setup({
+    -- leave nil if `claude` is on your PATH
+    -- if you use a local install, set it to "~/.claude/local/claude"
+    terminal_cmd = nil,
+
+    auto_start = true,
+    focus_after_send = false,
+
+    track_selection = true,
+    visual_demotion_delay_ms = 50,
+
+    terminal = {
+      provider = "snacks",
+      auto_close = true,
+
+      --- use a right-side floating panel so it doesn't fight your normal splits
+      ---@module "snacks"
+      ---@type snacks.win.Config|{}
+      snacks_win_opts = {
+        position = "right",
+        width = 0.42,
+        height = 1.0,
+        border = "rounded",
+      },
+    },
+
+    diff_opts = {
+      layout = "vertical",
+      open_in_new_tab = false,
+      keep_terminal_focus = false,
+      hide_terminal_in_new_tab = false,
+    },
+
+    -- open Claude from the repo root when possible
+    cwd_provider = function(ctx)
+      local ok, cwd = pcall(require, "claudecode.cwd")
+      if ok then
+        return cwd.git_root(ctx.file_dir or ctx.cwd) or ctx.file_dir or ctx.cwd
+      end
+      return ctx.file_dir or ctx.cwd
+    end,
+  })
+end)
+
 
 -- ============================================================================
 -- lazy plugins
 -- ============================================================================
+
+lazy_event({ "InsertEnter" }, "*", "blink.cmp", nil, function()
+  require("blink.cmp").setup({
+    keymap = {
+      preset = "default",
+      ["<C-Space>"] = { "show", "show_documentation", "hide_documentation" },
+      ["<CR>"] = { "accept", "fallback" },
+    },
+
+    appearance = {
+      use_nvim_cmp_as_default = false,
+      nerd_font_variant = "mono",
+    },
+
+    completion = {
+      documentation = {
+        auto_show = true,
+        auto_show_delay_ms = 200,
+      },
+      menu = {
+        border = "rounded",
+      },
+      ghost_text = {
+        enabled = false,
+      },
+    },
+
+    sources = {
+      default = { "lsp", "path", "snippets", "buffer" },
+    },
+
+    fuzzy = {
+      implementation = "prefer_rust_with_warning",
+    },
+  })
+end)
 
 lazy_event({ "BufReadPost", "BufNewFile" }, "*", "vim-matchup")
 lazy_event({ "InsertEnter" }, "*", "nvim-autopairs", nil, function()

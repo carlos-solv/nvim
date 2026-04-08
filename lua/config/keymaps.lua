@@ -1,4 +1,3 @@
-
 local km = vim.keymap.set
 local fzf = require('fzf-lua')
 local obsidian = require('obsidian')
@@ -82,4 +81,23 @@ km('', '<leader>mp', ':MarkdownPreviewToggle<CR>')
 km("n", "<leader>gf", ':Obsidian follow_link<CR>')
 
 -- Native Undotree
-vim.keymap.set("n", "<leader>u", "<cmd>Undotree<CR>", { desc = "Undo tree" })
+km("n", "<leader>u", "<cmd>Undotree<CR>", { desc = "Undo tree" })
+
+-- Dashboard
+km("n", "<leader>dd", function()
+  Snacks.dashboard()
+end, { desc = "Dashboard" })
+
+-- Claude Code
+km({ "n", "x" }, "<leader>ac", "<cmd>ClaudeCode<cr>", { desc = "Claude: Toggle" })
+km({ "n", "x" }, "<leader>aF", "<cmd>ClaudeCodeFocus<cr>", { desc = "Claude: Focus" })
+km("n", "<leader>ar", "<cmd>ClaudeCode --resume<cr>", { desc = "Claude: Resume" })
+km("n", "<leader>aC", "<cmd>ClaudeCode --continue<cr>", { desc = "Claude: Continue" })
+km("n", "<leader>am", "<cmd>ClaudeCodeSelectModel<cr>", { desc = "Claude: Select Model" })
+km("n", "<leader>ab", "<cmd>ClaudeCodeAdd %<cr>", { desc = "Claude: Add Current Buffer" })
+km("v", "<leader>as", "<cmd>ClaudeCodeSend<cr>", { desc = "Claude: Send Selection" })
+
+-- Diff review
+km("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Claude: Accept Diff" })
+km("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Claude: Deny Diff" })
+
