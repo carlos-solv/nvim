@@ -91,6 +91,18 @@ km("n", "<leader>aa", "<cmd>ClaudeCodeDiffAccept<cr>", { desc = "Claude: Accept 
 km("n", "<leader>ad", "<cmd>ClaudeCodeDiffDeny<cr>", { desc = "Claude: Deny Diff" })
 
 -- Autocomplete
-vim.keymap.set("i", "<C-Space>", function()
+km("i", "<C-Space>", function()
   vim.lsp.completion.get()
 end, { desc = "LSP completion" })
+
+km("n", "<leader>oi", function()
+  local bufnr = vim.api.nvim_get_current_buf()
+  local clients = vim.lsp.get_clients({ bufnr = bufnr })
+  vim.print(vim.tbl_map(function(c)
+    return {
+      id = c.id,
+      name = c.name,
+      attached = c.attached_buffers[bufnr] == true,
+    }
+  end, clients))
+end, { desc = "Inspect LSP clients for current buffer" })

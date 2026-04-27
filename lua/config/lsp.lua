@@ -78,50 +78,61 @@ do
   }
 
   vim.lsp.config("eslint", {
-    cmd = { "vscode-eslint-language-server", "--stdio" },
-    filetypes = {
-      "javascript",
-      "javascriptreact",
-      "typescript",
-      "typescriptreact",
-      "vue",
-      "svelte",
-      "astro",
+  cmd = { "vscode-eslint-language-server", "--stdio" },
+  filetypes = {
+    "javascript",
+    "javascriptreact",
+    "javascript.jsx",
+    "typescript",
+    "typescriptreact",
+    "typescript.tsx",
+    "vue",
+    "svelte",
+    "astro",
+  },
+  root_markers = {
+    "eslint.config.js",
+    "eslint.config.mjs",
+    "eslint.config.cjs",
+    "eslint.config.ts",
+    "eslint.config.mts",
+    "eslint.config.cts",
+    ".eslintrc",
+    ".eslintrc.js",
+    ".eslintrc.cjs",
+    ".eslintrc.json",
+    ".eslintrc.yaml",
+    ".eslintrc.yml",
+    "package.json",
+    ".git",
+  },
+  settings = {
+    validate = "on",
+    workingDirectory = { mode = "location" },
+    format = false,
+    codeActionOnSave = {
+      enable = true,
+      mode = "all",
     },
-    root_markers = {
-      "eslint.config.js",
-      "eslint.config.mjs",
-      "eslint.config.cjs",
-      "eslint.config.ts",
-      "eslint.config.mts",
-      "eslint.config.cts",
-      ".eslintrc",
-      ".eslintrc.js",
-      ".eslintrc.cjs",
-      ".eslintrc.json",
-      ".eslintrc.yaml",
-      ".eslintrc.yml",
-      "package.json",
-      ".git",
+    experimental = {
+      useFlatConfig = false,
     },
-    settings = {
-      validate = "on",
-      packageManager = "npm",
-      useESLintClass = false,
-      experimental = {
-        useFlatConfig = false,
-      },
-      workingDirectory = { mode = "auto" },
-      format = false,
-      codeActionOnSave = {
-        enable = true,
-        mode = "all",
-      },
-      nodePath = "",
-    },
-  })
-
-  vim.lsp.enable("eslint")
+  },
+  on_attach = function(client, bufnr)
+    vim.api.nvim_create_autocmd("BufWritePre", {
+      buffer = bufnr,
+      callback = function()
+        vim.lsp.buf.code_action({
+          context = {
+            only = { "source.fixAll.eslint" },
+            diagnostics = {},
+          },
+          apply = true,
+        })
+      end,
+    })
+  end,
+})
 
 
   vim.lsp.config.tailwindcss = {

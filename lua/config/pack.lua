@@ -8,7 +8,7 @@ vim.pack.add({
 
   { src = gh("andymass/vim-matchup"),                        name = "vim-matchup" },
   { src = gh("nvim-lualine/lualine.nvim"),                   name = "lualine.nvim" },
-  { src = gh("lukas-reineke/indent-blankline.nvim"),         name = "indent-blankline.nvim" },
+  --[[ { src = gh("lukas-reineke/indent-blankline.nvim"),         name = "indent-blankline.nvim" }, ]]
   { src = gh("ibhagwan/fzf-lua"),                            name = "fzf-lua" },
   { src = gh("stevearc/conform.nvim"),                       name = "conform.nvim" },
   { src = gh("numToStr/Comment.nvim"),                       name = "Comment.nvim" },
@@ -38,10 +38,10 @@ vim.api.nvim_create_autocmd("PackChanged", {
 })
 
 require("bigfile").setup({
-  filesize = 2,        -- size of the file in MiB, the plugin round file sizes to the closest MiB
-  pattern = { "*" },   -- autocmd pattern or function see <### Overriding the detection of big files>
-  features = {         -- features to disable
-    "indent_blankline",
+  filesize = 2,      -- size of the file in MiB, the plugin round file sizes to the closest MiB
+  pattern = { "*" }, -- autocmd pattern or function see <### Overriding the detection of big files>
+  features = {       -- features to disable
+    --[[ "indent_blankline", ]]
     "illuminate",
     "lsp",
     "treesitter",
@@ -161,7 +161,7 @@ require("bufferline").setup({
 })
 
 -- indent guides
-require("ibl").setup({})
+-- require("ibl").setup({})
 
 -- fzf
 require("fzf-lua").setup({
@@ -309,24 +309,31 @@ require("otter").setup({
       }) or vim.fn.getcwd()
     end,
   },
+  debug = false,
+  verbose = {
+    no_code_found = true,
+  },
 })
 
-vim.api.nvim_create_augroup("my.otter.liquid", { clear = true })
+local group = vim.api.nvim_create_augroup("my.otter.liquid", { clear = true })
 
 vim.api.nvim_create_autocmd("FileType", {
-  group = "my.otter.liquid",
+  group = group,
   pattern = "liquid",
-  callback = function()
-    vim.defer_fn(function()
-      vim.lsp.enable("shopify_theme_ls")
-      require("otter").activate({
-        "liquid",
-        "html",
-        "css",
-        "javascript",
-        "typescript",
-        "json",
-      }, true, true)
-    end, 100)
+  callback = function(args)
+    local bufnr = args.buf
+
+    if vim.b[bufnr].otter_activated then
+      return
+    end
+    vim.b[bufnr].otter_activated = true
+
+    vim.schedule(function()
+      if vim.api.nvim_buf_is_valid(bufnr) then
+        vim.api.nvim_buf_call(bufnr, function()
+          require("otter").activate(nil, true, true)
+        end)
+      end
+    end)
   end,
 })
